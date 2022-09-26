@@ -1,4 +1,3 @@
-import bodyParser from "body-parser";
 import express from "express";
 import pg from "pg";
 
@@ -9,13 +8,22 @@ const pool = new pg.Pool();
 const app = express();
 const port = process.env.PORT || 3333;
 
-app.use(bodyParser.json());
-app.use(bodyParser.raw({ type: "application/vnd.custom-type" }));
-app.use(bodyParser.text({ type: "text/html" }));
+app.use(express.json());
 
 app.get("/", async (req, res) => {
-  const { rows } = await pool.query("SELECT NOW()");
-  res.send(`Hello, World! The time from the DB is ${rows[0].now}`);
+  res.sendStatus(403);
+});
+
+app.get("/skills", async (req, res) => {
+  const { rows } = await pool.query('select * from skills where active = true');
+  res.header('Content-Type', 'application/json');
+  res.json(rows);
+});
+
+app.get("/projects", async (req, res) => {
+  const { rows } = await pool.query('select * from project where active = true');
+  res.header('Content-Type', 'application/json');
+  res.json(rows);
 });
 
 app.listen(port, () => {
