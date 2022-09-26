@@ -1,5 +1,6 @@
 import express from "express";
 import pg from "pg";
+import cors from "cors";
 
 // Connect to the database using the DATABASE_URL environment
 //   variable injected by Railway
@@ -9,6 +10,7 @@ const app = express();
 const port = process.env.PORT || 3333;
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/", async (req, res) => {
   res.sendStatus(403);
