@@ -15,7 +15,7 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/skills", async (req, res) => {
-  const { rows } = await pool.query('select * from skills where active = true');
+  const { rows } = await pool.query('select * from skill where active = true');
   res.header('Content-Type', 'application/json');
   res.json(rows);
 });
