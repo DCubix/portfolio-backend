@@ -11,7 +11,7 @@ const port = process.env.PORT || 3333;
 
 app.use(express.json() as RequestHandler);
 app.use(cors({
-  origin: 'https://dcubix.github.io/'
+  origin: 'https://dcubix.github.io'
 }));
 
 app.get("/", async (req, res) => {
